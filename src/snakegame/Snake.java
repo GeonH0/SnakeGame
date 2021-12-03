@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,6 +17,7 @@ public class Snake {
 	int height =768;
 	int speed=50;
 	ArrayList<Madi> snake = new ArrayList<Madi>();
+	ArrayList<Food> foods = new ArrayList<Food>();
 	
 	int x=10;//픽 단위
 	int y =10;//
@@ -45,21 +47,57 @@ public class Snake {
 		snake.add(new Madi(x-2,y));
 		snake.add(new Madi(x-3,y));
 		
-		foodX = (int)(Math.random()*width);
-		foodY = (int)(Math.random()*height);
+		for(int i=0;i<10;i++) {
+		
+			foodX = (int)(Math.random()*(int)(width/10));
+			foodY = (int)(Math.random()*(int)(height/10));
+			foods.add(new Food(foodX,foodY));
+		}
+		
 		
 	}
 	
 	
 	public void start() {
 		while(true) {
-			
 			x+= xDirection;
 			y+= yDirection;
+			int lenght = snake.size();
+			
+			int lastX = snake.get(lenght-1).getX();
+			int lastY = snake.get(lenght-1).getY();
+			
+			for(int i = lenght-1;i>0;i--) {
+				snake.get(i).setX(snake.get(i-1).getX());
+				snake.get(i).setY(snake.get(i-1).getY());
+			}
+			
+			snake.get(0).setX(snake.get(0).getX()+xDirection);
+			snake.get(0).setY(snake.get(0).getY()+yDirection);
+			Iterator iter = foods.iterator();
+			
+			
+			
+			while(iter.hasNext()) {
+				
+			Food food = (Food) iter.next();
+		if((snake.get(0).getX()==food.getX())&&(snake.get(0).getY()==food.getY())) {
+					snake.add(new Madi(lastX,lastY));
+					iter.remove();
+
+	
+		}
+			
+
+	}
+			
+
+
 			
 
 			
 			frame.repaint();
+			
 			try {
 				Thread.sleep(speed);
 			} catch (InterruptedException e) {
@@ -75,14 +113,18 @@ public class Snake {
 			
 			
 			
-			g.setColor(Color.WHITE);
+			
 			for(Madi madi:snake) {
+				g.setColor(Color.WHITE);
 				g.fillRect(madi.getX()*size, madi.getY()*size, size , size );
 			}
 			
-//			g.setColor(new Color((int)(Math.random()*100),(int)(Math.random()*100),(int)(Math.random()*100)));
-			g.setColor(Color.BLUE);
-			g.fillOval(foodX*size, foodY*size, size, size);
+
+			for(Food food:foods) {
+				g.setColor(new Color(food.color));
+				g.fillOval(food.getX()* size, food.getY() * size, size, size);	
+			}
+			
 		}
 	}
 	
