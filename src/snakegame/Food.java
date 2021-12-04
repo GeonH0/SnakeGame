@@ -27,4 +27,12 @@ public class Food {
 		this.y = y;
 	}
 
+	public int getColor() {
+		return color;
+	}
+
+	public void setColor(int color) {
+		this.color = color;
+	}
+
 }

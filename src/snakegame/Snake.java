@@ -70,22 +70,28 @@ public class Snake {
 				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
 				xDirection=1;
 				yDirection=0;
+				System.exit(0);
 			}
 			else if((snake.get(0).getX()>width)) {
 				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
 				xDirection=-1;
 				yDirection=0;
+				System.exit(0);
 			}
 			else if(snake.get(0).getY()<0) {
 				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
 				xDirection=0;
 				yDirection=1;
+				System.exit(0);
 			}
 			else if(snake.get(0).getY()>height) {
 				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
 				xDirection=0;
 				yDirection=-1;
+				System.exit(0);
 			}
+			
+			
 			x+= xDirection;
 			y+= yDirection;
 			
@@ -108,11 +114,17 @@ public class Snake {
 			
 			
 			while(iter.hasNext()) {
-				
 			Food food = (Food) iter.next();
 		if((snake.get(0).getX()==food.getX())&&(snake.get(0).getY()==food.getY())) {
+					if(food.getColor()<0xf0f8ff) {
+						frame.addKeyListener(new ConverseListner());
+					}
+					else {
+						frame.addKeyListener(new MyListenr());
+					}
 					snake.add(new Madi(lastX,lastY));
 					iter.remove();
+					
 					
 
 	
@@ -150,8 +162,6 @@ public class Snake {
 					g.fillRect(madi.getX()*size, madi.getY()*size, size , size );
 				}
 				else {
-					
-				
 				g.setColor(Color.black);
 				g.fillRect(madi.getX()*size, madi.getY()*size, size , size );
 				}
