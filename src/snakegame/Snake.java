@@ -8,11 +8,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Snake {
 	JFrame frame;
 	JPanel panel;
+	JOptionPane option;
 	int width = 100;
 	int height =70;
 	int speed=50;
@@ -32,6 +34,7 @@ public class Snake {
 
 	public Snake() {
 		frame = new JFrame("뱀 게임");
+		option = new JOptionPane();
 		Gamepanel gamepanle = new Gamepanel();
 		frame.getContentPane().add(gamepanle);
 		
@@ -61,26 +64,31 @@ public class Snake {
 	
 	public void start() {
 		while(true) {
+			int lenght = snake.size();
 			
 			if((snake.get(0).getX()<0)) {
+				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
 				xDirection=1;
 				yDirection=0;
 			}
 			else if((snake.get(0).getX()>width)) {
+				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
 				xDirection=-1;
 				yDirection=0;
 			}
 			else if(snake.get(0).getY()<0) {
+				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
 				xDirection=0;
 				yDirection=1;
 			}
 			else if(snake.get(0).getY()>height) {
+				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
 				xDirection=0;
 				yDirection=-1;
 			}
 			x+= xDirection;
 			y+= yDirection;
-			int lenght = snake.size();
+			
 			
 			int lastX = snake.get(lenght-1).getX();
 			int lastY = snake.get(lenght-1).getY();
