@@ -116,7 +116,7 @@ public class Snake {
 			while(iter.hasNext()) {
 			Food food = (Food) iter.next();
 		if((snake.get(0).getX()==food.getX())&&(snake.get(0).getY()==food.getY())) {
-					if(food.getColor()<0xf0f8ff) {
+					if(food.getColor()>0xf0f8f) {
 						frame.addKeyListener(new ConverseListner());
 					}
 					else {
