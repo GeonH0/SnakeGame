@@ -17,15 +17,20 @@ public class Snake {
 	JOptionPane option;
 	int width = 100;
 	int height =70;
-	int speed=50;
+	int speed=70;
 	ArrayList<Madi> snake = new ArrayList<Madi>();
 	ArrayList<Food> foods = new ArrayList<Food>();
+	ArrayList<Madi> snake2 = new ArrayList<Madi>();
 	
-	int x=10;//픽 단위
-	int y =10;//
+	int x=10,x2=width-10;
+	int y =10,y2=10;
 	
 	int xDirection=1;
 	int yDirection =0;
+	
+	int xDirection1=-1;
+	int yDirection1 =0;
+	
 	
 	int foodX =0;
 	int foodY =0;
@@ -52,6 +57,11 @@ public class Snake {
 		snake.add(new Madi(x-2,y));
 		snake.add(new Madi(x-3,y));
 		
+		snake2.add(new Madi(x2,y2));
+		snake2.add(new Madi(x2-1,y2));
+		snake2.add(new Madi(x2-2,y2));
+		snake2.add(new Madi(x2-3,y2));
+		
 		
 		
 		for(int i=0;i<5;i++) {
@@ -69,6 +79,7 @@ public class Snake {
 	public void start() {
 		while(true) {
 			int lenght = snake.size();
+			int lenght2 = snake2.size();
 			
 			if((snake.get(0).getX()<0)) {
 				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
@@ -99,19 +110,34 @@ public class Snake {
 			x+= xDirection;
 			y+= yDirection;
 			
+			x2+=xDirection1;
+			y2+=yDirection1;
+			
 			
 			int lastX = snake.get(lenght-1).getX();
 			int lastY = snake.get(lenght-1).getY();
+			
+			int lastX2 = snake2.get(lenght2-1).getX();
+			int lastY2 = snake2.get(lenght2-1).getY();
 			
 			for(int i = lenght-1;i>0;i--) {
 				snake.get(i).setX(snake.get(i-1).getX());
 				snake.get(i).setY(snake.get(i-1).getY());
 			}
 			
+			for(int i=lenght2-1;i>0;i--) {
+				snake2.get(i).setX(snake2.get(i-1).getX());
+				snake2.get(i).setY(snake2.get(i-1).getY());
+			}
+			
+			
 
 			
 			snake.get(0).setX(snake.get(0).getX()+xDirection);
 			snake.get(0).setY(snake.get(0).getY()+yDirection);
+			
+			snake2.get(0).setX(snake2.get(0).getX()+xDirection1);
+			snake2.get(0).setY(snake2.get(0).getY()+yDirection1);
 			
 			Iterator iter = foods.iterator();
 			
@@ -130,7 +156,19 @@ public class Snake {
 					iter.remove();
 					
 							}
+		if((snake2.get(0).getX()==food.getX())&&(snake2.get(0).getY()==food.getY())) {
+			if((food.getColor()>0x00FFFF)&&(food.getColor()<0x191970)) {
+				frame.addKeyListener(new ConverseListner());
+			}
+			else {
+				frame.addKeyListener(new MyListenr());
+			}
+			snake2.add(new Madi(lastX2,lastY2));
+			iter.remove();
+			
+					}
 		}
+			
 		
 			if(foods.isEmpty()) {
 
@@ -148,6 +186,9 @@ public class Snake {
 
 			
 			frame.repaint();
+			if(snake.size()>10) {
+				speed = 30;
+			}
 			
 			try {
 				Thread.sleep(speed);
@@ -167,6 +208,17 @@ public class Snake {
 			
 			for(Madi madi:snake) {
 				if(snake.get(0)==madi) {
+					g.setColor(Color.red);
+					g.fillRect(madi.getX()*size, madi.getY()*size, size , size );
+				}
+				else {
+				g.setColor(Color.white);
+				g.fillRect(madi.getX()*size, madi.getY()*size, size , size );
+				}
+			}
+			
+			for(Madi madi:snake2) {
+				if(snake2.get(0)==madi) {
 					g.setColor(Color.red);
 					g.fillRect(madi.getX()*size, madi.getY()*size, size , size );
 				}
@@ -212,6 +264,22 @@ public class Snake {
 			case KeyEvent.VK_RIGHT:
 				xDirection=1;
 				yDirection=0;
+				break;
+			case KeyEvent.VK_W:
+				xDirection1=0;
+				yDirection1=-1;
+				break;
+			case KeyEvent.VK_S:
+				xDirection1=0;
+				yDirection1=1;
+				break;
+			case KeyEvent.VK_A:
+				xDirection1=-1;
+				yDirection1=0;
+				break;
+			case KeyEvent.VK_D:
+				xDirection1=1;
+				yDirection1=0;
 				break;
 			}
 			
