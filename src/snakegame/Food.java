@@ -8,7 +8,7 @@ public class Food {
 	public Food(int x, int y) {
 		this.x= x;
 		this.y= y;
-		color = (int)(Math.random()*0xFFFFF);
+		color = (int)(Math.random()*0xFFFFFF);
 	}
 
 	public int getX() {

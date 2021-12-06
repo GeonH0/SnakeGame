@@ -6,6 +6,7 @@ public class SnakeGameDriver {
 		// TODO Auto-generated method stub
 		Snake snake = new Snake();
 		snake.start();
+		
 
 	}
 

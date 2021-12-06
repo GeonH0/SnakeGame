@@ -51,12 +51,15 @@ public class Snake {
 		snake.add(new Madi(x-2,y));
 		snake.add(new Madi(x-3,y));
 		
-		for(int i=0;i<10;i++) {
+		
+		
+		for(int i=0;i<5;i++) {
 		
 			foodX = (int)(Math.random()*(int)(width));
 			foodY = (int)(Math.random()*(int)(height));
 			foods.add(new Food(foodX,foodY));
 		}
+		
 		
 		
 	}
@@ -68,26 +71,26 @@ public class Snake {
 			
 			if((snake.get(0).getX()<0)) {
 				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
-				xDirection=1;
-				yDirection=0;
+//				xDirection=1;
+//				yDirection=0;
 				System.exit(0);
 			}
 			else if((snake.get(0).getX()>width)) {
 				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
-				xDirection=-1;
-				yDirection=0;
+//				xDirection=-1;
+//				yDirection=0;
 				System.exit(0);
 			}
 			else if(snake.get(0).getY()<0) {
 				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
-				xDirection=0;
-				yDirection=1;
+//				xDirection=0;
+//				yDirection=1;
 				System.exit(0);
 			}
 			else if(snake.get(0).getY()>height) {
 				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
-				xDirection=0;
-				yDirection=-1;
+//				xDirection=0;
+//				yDirection=-1;
 				System.exit(0);
 			}
 			
@@ -116,7 +119,7 @@ public class Snake {
 			while(iter.hasNext()) {
 			Food food = (Food) iter.next();
 		if((snake.get(0).getX()==food.getX())&&(snake.get(0).getY()==food.getY())) {
-					if(food.getColor()>0xf0f8f) {
+					if((food.getColor()>0x00FFFF)&&(food.getColor()<0x191970)) {
 						frame.addKeyListener(new ConverseListner());
 					}
 					else {
@@ -125,14 +128,19 @@ public class Snake {
 					snake.add(new Madi(lastX,lastY));
 					iter.remove();
 					
-					
-
-	
+							}
 		}
-			
+		
+			if(foods.isEmpty()) {
 
-	}
-			
+					for(int i=0;i<5;i++) {
+						
+						foodX = (int)(Math.random()*(int)(width));
+						foodY = (int)(Math.random()*(int)(height));
+						foods.add(new Food(foodX,foodY));
+					
+				}
+			}
 
 
 			
