@@ -37,6 +37,7 @@ public class Snake {
 		option = new JOptionPane();
 		Gamepanel gamepanle = new Gamepanel();
 		frame.getContentPane().add(gamepanle);
+		gamepanle.setBackground(Color.black);
 		
 		
 		frame.addKeyListener(new MyListenr());
@@ -161,7 +162,7 @@ public class Snake {
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			
-			
+			g.setColor(Color.black);
 			
 			
 			for(Madi madi:snake) {
@@ -170,7 +171,7 @@ public class Snake {
 					g.fillRect(madi.getX()*size, madi.getY()*size, size , size );
 				}
 				else {
-				g.setColor(Color.black);
+				g.setColor(Color.white);
 				g.fillRect(madi.getX()*size, madi.getY()*size, size , size );
 				}
 			}
