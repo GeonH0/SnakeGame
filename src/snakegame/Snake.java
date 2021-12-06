@@ -15,8 +15,8 @@ public class Snake {
 	JFrame frame;
 	JPanel panel;
 	JOptionPane option;
-	int width = 100;
-	int height =70;
+	int width = 190;
+	int height =100;
 	int speed=70;
 	ArrayList<Madi> snake = new ArrayList<Madi>();
 	ArrayList<Food> foods = new ArrayList<Food>();
@@ -64,7 +64,7 @@ public class Snake {
 		
 		
 		
-		for(int i=0;i<5;i++) {
+		for(int i=0;i<20;i++) {
 		
 			foodX = (int)(Math.random()*(int)(width));
 			foodY = (int)(Math.random()*(int)(height));
@@ -207,7 +207,7 @@ public class Snake {
 		
 			if(foods.isEmpty()) {
 
-					for(int i=0;i<5;i++) {
+					for(int i=0;i<10;i++) {
 						
 						foodX = (int)(Math.random()*(int)(width));
 						foodY = (int)(Math.random()*(int)(height));
@@ -365,6 +365,22 @@ public class Snake {
 			case KeyEvent.VK_LEFT:
 				xDirection=1;
 				yDirection=0;
+				break;
+			case KeyEvent.VK_S:
+				xDirection1=0;
+				yDirection1=-1;
+				break;
+			case KeyEvent.VK_W:
+				xDirection1=0;
+				yDirection1=1;
+				break;
+			case KeyEvent.VK_D:
+				xDirection1=-1;
+				yDirection1=0;
+				break;
+			case KeyEvent.VK_A:
+				xDirection1=1;
+				yDirection1=0;
 				break;
 			}
 			
