@@ -81,30 +81,65 @@ public class Snake {
 			int lenght = snake.size();
 			int lenght2 = snake2.size();
 			
-			if((snake.get(0).getX()<0)) {
-				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
-//				xDirection=1;
-//				yDirection=0;
-				System.exit(0);
+			if((snake.get(0).getX()<0)||(snake2.get(0).getX()<0)) {
+				if((snake.get(0).getX()<0)) {
+					option.showMessageDialog(null,"승자:snake2 \n점수는: "+lenght2,"승리자",option.INFORMATION_MESSAGE);
+					System.exit(0);
+				}
+				else {
+					option.showMessageDialog(null,"승자:snake1 \n점수는: "+lenght,"승리자",option.INFORMATION_MESSAGE);
+					System.exit(0);
+				}
+
 			}
-			else if((snake.get(0).getX()>width)) {
-				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
-//				xDirection=-1;
-//				yDirection=0;
-				System.exit(0);
+			else if((snake.get(0).getX()>width)||(snake2.get(0).getX()>width)) {
+				if((snake.get(0).getX()>width)) {
+					option.showMessageDialog(null,"승자:snake2 \n점수는: "+lenght2,"승리자",option.INFORMATION_MESSAGE);
+					System.exit(0);
+				}
+				else {
+					option.showMessageDialog(null,"승자:snake1 \n점수는: "+lenght,"승리자",option.INFORMATION_MESSAGE);
+					System.exit(0);
+				}
 			}
-			else if(snake.get(0).getY()<0) {
-				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
-//				xDirection=0;
-//				yDirection=1;
-				System.exit(0);
+			else if((snake.get(0).getY()<0)||(snake2.get(0).getY()<0)) {
+				if((snake.get(0).getY()<0)) {
+					option.showMessageDialog(null,"승자:snake2 \n점수는: "+lenght2,"승리자",option.INFORMATION_MESSAGE);
+					System.exit(0);
+				}
+				else {
+					option.showMessageDialog(null,"승자:snake1 \n점수는: "+lenght,"승리자",option.INFORMATION_MESSAGE);
+					System.exit(0);
+				}
 			}
-			else if(snake.get(0).getY()>height) {
-				option.showMessageDialog(null,"점수: "+snake.size(),"점수는: ",option.INFORMATION_MESSAGE);
-//				xDirection=0;
-//				yDirection=-1;
-				System.exit(0);
+			else if((snake.get(0).getY()>height)||(snake2.get(0).getY()>height)) {
+				if((snake.get(0).getY()>height)) {
+					option.showMessageDialog(null,"승자:snake2 \n점수는: "+lenght2,"승리자",option.INFORMATION_MESSAGE);
+					System.exit(0);
+				}
+				else {
+					option.showMessageDialog(null,"승자:snake1 \n점수는: "+lenght,"승리자",option.INFORMATION_MESSAGE);
+					System.exit(0);
+				}
 			}
+			
+			for(int i=0;i<lenght;i++) {
+				for(int j=0;j<lenght2;j++) {
+					if((snake.get(i).getX()==snake2.get(j).getX())&&(snake.get(i).getY()==snake2.get(j).getY())) {
+						if((lenght<lenght2)) {
+							option.showMessageDialog(null,"승자:snake2 \n점수는: "+lenght2,"승리자",option.INFORMATION_MESSAGE);
+							System.exit(0);
+						}
+						else {
+							option.showMessageDialog(null,"승자:snake1 \n점수는: "+lenght,"승리자",option.INFORMATION_MESSAGE);
+							System.exit(0);
+						}
+
+					}
+					
+				}
+			}
+
 			
 			
 			x+= xDirection;
@@ -180,6 +215,8 @@ public class Snake {
 					
 				}
 			}
+			
+
 
 
 			
@@ -208,21 +245,30 @@ public class Snake {
 			
 			for(Madi madi:snake) {
 				if(snake.get(0)==madi) {
+					g.setColor(Color.green);
+					g.drawRect(madi.getX()*size, madi.getY()*size, size , size);
 					g.setColor(Color.red);
 					g.fillRect(madi.getX()*size, madi.getY()*size, size , size );
 				}
 				else {
+				g.setColor(Color.green);
+				g.drawRect(madi.getX()*size, madi.getY()*size, size , size);
 				g.setColor(Color.white);
 				g.fillRect(madi.getX()*size, madi.getY()*size, size , size );
+				
 				}
 			}
 			
 			for(Madi madi:snake2) {
 				if(snake2.get(0)==madi) {
-					g.setColor(Color.red);
+					g.setColor(Color.green);
+					g.drawRect(madi.getX()*size, madi.getY()*size, size , size);
+					g.setColor(Color.blue);
 					g.fillRect(madi.getX()*size, madi.getY()*size, size , size );
 				}
 				else {
+				g.setColor(Color.green);
+				g.drawRect(madi.getX()*size, madi.getY()*size, size , size);
 				g.setColor(Color.white);
 				g.fillRect(madi.getX()*size, madi.getY()*size, size , size );
 				}
