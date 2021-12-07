@@ -182,7 +182,7 @@ public class Snake {
 			Food food = (Food) iter.next();
 		if((snake.get(0).getX()==food.getX())&&(snake.get(0).getY()==food.getY())) {
 					if((food.getColor()>0x00FFFF)&&(food.getColor()<0x191970)) {
-						frame.addKeyListener(new ConverseListner());
+						frame.addKeyListener(new ConverseListener());
 					}
 					else {
 						frame.addKeyListener(new MyListener());
@@ -193,7 +193,7 @@ public class Snake {
 							}
 		if((snake2.get(0).getX()==food.getX())&&(snake2.get(0).getY()==food.getY())) {
 			if((food.getColor()>0x00FFFF)&&(food.getColor()<0x191970)) {
-				frame.addKeyListener(new ConverseListner());
+				frame.addKeyListener(new ConverseListener());
 			}
 			else {
 				frame.addKeyListener(new MyListener());
@@ -338,7 +338,7 @@ public class Snake {
 		}
 		
 	}
-	private class ConverseListner implements KeyListener{
+	private class ConverseListener implements KeyListener{
 
 		@Override
 		public void keyTyped(KeyEvent e) {
