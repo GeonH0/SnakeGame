@@ -145,6 +145,17 @@ public class Snake {
 					
 				}
 			}
+			 
+				for(int j=1;j<lenght;j++) {
+					if((snake.get(0).getX()==snake.get(j).getX())&&(snake.get(0).getY()==snake.get(j).getY())) {
+						option.showMessageDialog(null,"승자:snake2 \n점수는: "+(lenght2-4),"승리자",option.INFORMATION_MESSAGE);
+						System.exit(0);
+					}
+					
+				}
+				
+
+			
 
 			
 			
@@ -223,6 +234,7 @@ public class Snake {
 			}
 			
 			frame.repaint();
+
 			
 			if(snake.size()>speedsize) {
 				speed = (50-speedup);
