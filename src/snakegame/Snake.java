@@ -18,6 +18,8 @@ public class Snake {
 	int width = 190;
 	int height =100;
 	int speed=70;
+	int speedsize = 5;
+	int speedup = 0;
 	ArrayList<Madi> snake = new ArrayList<Madi>();
 	ArrayList<Food> foods = new ArrayList<Food>();
 	ArrayList<Madi> snake2 = new ArrayList<Madi>();
@@ -221,14 +223,16 @@ public class Snake {
 			}
 			
 			frame.repaint();
-			if(snake.size()>10) {
-				speed = 30;
+			
+			if(snake.size()>speedsize) {
+				speed = (50-speedup);
+				speedsize = speedsize + 5;
+				speedup = speedup + 10;
 			}
 			
 			try {
 				Thread.sleep(speed);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
