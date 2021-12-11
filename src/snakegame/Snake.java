@@ -40,9 +40,9 @@ public class Snake {
 	public Snake() {
 		frame = new JFrame("뱀 게임");
 		option = new JOptionPane();
-		Gamepanel gamepanle = new Gamepanel();
-		frame.getContentPane().add(gamepanle);
-		gamepanle.setBackground(Color.black);
+		Gamepanel gamepanel = new Gamepanel();
+		frame.getContentPane().add(gamepanel);
+		gamepanel.setBackground(Color.black);
 		
 		
 		frame.addKeyListener(new MyListener());
@@ -83,42 +83,42 @@ public class Snake {
 			
 			if((snake.get(0).getX()<0)||(snake2.get(0).getX()<0)) {
 				if((snake.get(0).getX()<0)) {
-					option.showMessageDialog(null,"승자:snake2 \n점수는: "+lenght2,"승리자",option.INFORMATION_MESSAGE);
+					option.showMessageDialog(null,"승자:snake2 \n점수는: "+(lenght2-4),"승리자",option.INFORMATION_MESSAGE);
 					System.exit(0);
 				}
 				else {
-					option.showMessageDialog(null,"승자:snake1 \n점수는: "+lenght,"승리자",option.INFORMATION_MESSAGE);
+					option.showMessageDialog(null,"승자:snake1 \n점수는: "+(lenght-4),"승리자",option.INFORMATION_MESSAGE);
 					System.exit(0);
 				}
 
 			}
 			else if((snake.get(0).getX()>width)||(snake2.get(0).getX()>width)) {
 				if((snake.get(0).getX()>width)) {
-					option.showMessageDialog(null,"승자:snake2 \n점수는: "+lenght2,"승리자",option.INFORMATION_MESSAGE);
+					option.showMessageDialog(null,"승자:snake2 \n점수는: "+(lenght2-4),"승리자",option.INFORMATION_MESSAGE);
 					System.exit(0);
 				}
 				else {
-					option.showMessageDialog(null,"승자:snake1 \n점수는: "+lenght,"승리자",option.INFORMATION_MESSAGE);
+					option.showMessageDialog(null,"승자:snake1 \n점수는: "+(lenght-4),"승리자",option.INFORMATION_MESSAGE);
 					System.exit(0);
 				}
 			}
 			else if((snake.get(0).getY()<0)||(snake2.get(0).getY()<0)) {
 				if((snake.get(0).getY()<0)) {
-					option.showMessageDialog(null,"승자:snake2 \n점수는: "+lenght2,"승리자",option.INFORMATION_MESSAGE);
+					option.showMessageDialog(null,"승자:snake2 \n점수는: "+(lenght2-4),"승리자",option.INFORMATION_MESSAGE);
 					System.exit(0);
 				}
 				else {
-					option.showMessageDialog(null,"승자:snake1 \n점수는: "+lenght,"승리자",option.INFORMATION_MESSAGE);
+					option.showMessageDialog(null,"승자:snake1 \n점수는: "+(lenght-4),"승리자",option.INFORMATION_MESSAGE);
 					System.exit(0);
 				}
 			}
 			else if((snake.get(0).getY()>height)||(snake2.get(0).getY()>height)) {
 				if((snake.get(0).getY()>height)) {
-					option.showMessageDialog(null,"승자:snake2 \n점수는: "+lenght2,"승리자",option.INFORMATION_MESSAGE);
+					option.showMessageDialog(null,"승자:snake2 \n점수는: "+(lenght2-4),"승리자",option.INFORMATION_MESSAGE);
 					System.exit(0);
 				}
 				else {
-					option.showMessageDialog(null,"승자:snake1 \n점수는: "+lenght,"승리자",option.INFORMATION_MESSAGE);
+					option.showMessageDialog(null,"승자:snake1 \n점수는: "+(lenght-4),"승리자",option.INFORMATION_MESSAGE);
 					System.exit(0);
 				}
 			}
@@ -127,11 +127,15 @@ public class Snake {
 				for(int j=0;j<lenght2;j++) {
 					if((snake.get(i).getX()==snake2.get(j).getX())&&(snake.get(i).getY()==snake2.get(j).getY())) {
 						if((lenght<lenght2)) {
-							option.showMessageDialog(null,"승자:snake2 \n점수는: "+lenght2,"승리자",option.INFORMATION_MESSAGE);
+							option.showMessageDialog(null,"승자:snake2 \n점수는: "+(lenght2-4),"승리자",option.INFORMATION_MESSAGE);
+							System.exit(0);
+						}
+						else if((lenght>lenght2)){
+							option.showMessageDialog(null,"승자:snake1 \n점수는: "+(lenght-4),"승리자",option.INFORMATION_MESSAGE);
 							System.exit(0);
 						}
 						else {
-							option.showMessageDialog(null,"승자:snake1 \n점수는: "+lenght,"승리자",option.INFORMATION_MESSAGE);
+							option.showMessageDialog(null,"동점입니다. \n점수는: "+(lenght-4),"승리자",option.INFORMATION_MESSAGE);
 							System.exit(0);
 						}
 
@@ -215,12 +219,6 @@ public class Snake {
 					
 				}
 			}
-			
-
-
-
-			
-
 			
 			frame.repaint();
 			if(snake.size()>10) {
