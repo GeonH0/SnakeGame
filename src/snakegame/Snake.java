@@ -1,6 +1,8 @@
 package snakegame;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -8,15 +10,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
+
 
 public class Snake {
 	JFrame frame;
 	JPanel panel;
 	JOptionPane option;
-	int width = 190;
-	int height =100;
+	JLabel player1;
+	JLabel player2;
+	int width = 120;
+	int height =70;
 	int speed=70;
 	int speedsize = 5;
 	int speedup = 0;
@@ -27,11 +35,11 @@ public class Snake {
 	int x=10,x2=width-10;
 	int y =10,y2=10;
 	
-	int xDirection=1;
-	int yDirection =0;
+	int xDirection=0;
+	int yDirection =1;
 	
-	int xDirection1=-1;
-	int yDirection1 =0;
+	int xDirection1=0;
+	int yDirection1 =1;
 	
 	
 	int foodX =0;
@@ -43,7 +51,17 @@ public class Snake {
 		frame = new JFrame("뱀 게임");
 		option = new JOptionPane();
 		Gamepanel gamepanel = new Gamepanel();
-		frame.getContentPane().add(gamepanel);
+		Scoreboard scoreboard = new Scoreboard();
+		player1 = new JLabel();
+		player1.setForeground(Color.white);
+		player2 = new JLabel();
+		player2.setForeground(Color.white);
+		frame.getContentPane().add(scoreboard,BorderLayout.NORTH);
+		scoreboard.setBackground(Color.black);
+		scoreboard.setPreferredSize(new Dimension(width,height));
+		scoreboard.add(player1);
+		scoreboard.add(player2);
+		frame.getContentPane().add(gamepanel,BorderLayout.CENTER);
 		gamepanel.setBackground(Color.black);
 		
 		
@@ -51,6 +69,9 @@ public class Snake {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(width*size,height*size);
 		frame.setVisible(true);
+		frame.setLayout(null);
+		
+	
 		
 
 		
@@ -153,7 +174,31 @@ public class Snake {
 					}
 					
 				}
+				if(xDirection1<0) {
+				for(int j =1;j<snake2.size()-1;j++) {
+					if((snake2.get(0).getX()==snake2.get(j).getX())&&(snake2.get(0).getY()==snake2.get(j).getY())) {
+						option.showMessageDialog(null,"승자:snake1 \n점수는: "+(snake.size()-4),"승리자",option.INFORMATION_MESSAGE);
+						System.exit(0);
+
+					}
+				}
+				}
+				else {
+					for(int j =1;j<snake2.size()-1;j++) {
+						if((snake2.get(0).getX()==snake2.get(j).getX())&&(snake2.get(0).getY()==snake2.get(j).getY())) {
+							option.showMessageDialog(null,"승자:snake1 \n점수는: "+(snake.size()-4),"승리자",option.INFORMATION_MESSAGE);
+							System.exit(0);
+
+						}
+					}
+					
+				}
 				
+				
+				
+				
+				
+
 
 			
 
@@ -233,8 +278,13 @@ public class Snake {
 				}
 			}
 			
+			
+			
 			frame.repaint();
-
+			player1.setText("play1의 점수:"+(snake.size()-4));
+			player1.setHorizontalAlignment(player1.LEFT);
+			player2.setText("play2의 점수:"+(snake2.size()-4));
+			player2.setHorizontalAlignment(SwingConstants.LEFT);
 			
 			if(snake.size()>speedsize) {
 				speed = (50-speedup);
@@ -250,11 +300,20 @@ public class Snake {
 		}
 	}
 	
+	private class Scoreboard extends JPanel{
+		public void paintComponent(Graphics g) {
+			super.paintComponent(g);
+			g.setColor(Color.yellow);
+		}
+		
+	}
+	
 	private class Gamepanel extends JPanel{
+
 		public void paintComponent(Graphics g) {
 			super.paintComponent(g);
 			
-			g.setColor(Color.black);
+//			g.setColor(Color.black);
 			
 			
 			for(Madi madi:snake) {
@@ -303,11 +362,13 @@ public class Snake {
 		public void keyTyped(KeyEvent e) {
 			// TODO Auto-generated method stub
 			
+			
 		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
 			// TODO Auto-generated method stub
+
 			switch (e.getKeyCode()) {
 			case KeyEvent.VK_UP:
 				xDirection=0;
@@ -342,12 +403,14 @@ public class Snake {
 				yDirection1=0;
 				break;
 			}
+
 			
 		}
 
 		@Override
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub
+
 			
 		}
 		
@@ -403,6 +466,7 @@ public class Snake {
 		@Override
 		public void keyReleased(KeyEvent e) {
 			// TODO Auto-generated method stub
+
 			
 		}
 		
